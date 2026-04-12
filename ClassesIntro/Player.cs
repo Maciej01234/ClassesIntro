@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ClassesIntro;
 
 public class Player
@@ -29,34 +31,38 @@ public class Player
      * - lista zadań ze statusem ich realizacji
      */
     private string avatar = "@";
-    private int x;
+    private Vector2 position;
+    
     private int y;
 
     public void Display()
     {
-        Console.SetCursorPosition(x, y);
+        Console.SetCursorPosition(position.x, position.y);
         Console.Write(avatar);
     }
 
     public void ClearPlayerPosition()
     {
-        Console.SetCursorPosition(x,y);
+        Console.SetCursorPosition(position.x,position.y);
         Console.Write(" ");
     }
     
     
     public void Move(int diffX, int diffY)
     {
-        int targetX = x + diffX;
-        int targetY = y + diffY;
-        if (targetX >= 0 && targetX < Console.BufferWidth)
+        Vector2 targetPosition = new Vector2();
+        targetPosition.x += position.x + diffX;
+        targetPosition.y += position.y + diffY;
+        
+
+        if (targetPosition.x >= 0 && targetPosition.x < Console.BufferWidth)
         {
-            x = targetX;
+            position.x = targetPosition.x;
         }
 
-        if (targetY >= 0 && targetY < Console.BufferHeight)
+        if (targetPosition.y >= 0 && targetPosition.y < Console.BufferHeight)
         {
-            y = targetY;
+            position.y = targetPosition.y;
         }
     }
 }
